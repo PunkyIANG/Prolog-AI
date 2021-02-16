@@ -1,0 +1,10 @@
+divizor(N,1):- N>0.
+divizor(N,Div):- Rest is N mod Div, Rest = 0.
+
+
+perfect(N,N,0).
+perfect(N,Suma,Counter):- Counter>0, N>0, Counter1 is Counter - 1,
+    (   divizor(N,Counter)->  Suma1 is Suma + Counter; Suma1 is Suma),
+    perfect(N,Suma1,Counter1).
+
+start_perfect(N):-Counter is N-1,perfect(N,0,Counter).

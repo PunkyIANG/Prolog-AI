@@ -1,0 +1,26 @@
+auto(bmw, bmw_524td, 1996, 220, diesel, automat, negru, 2.4, yes, 3000). 
+auto(bmw, bmw_525, 1990, 260, benzin, manual, alb, 2.5, yes, 6000). 
+auto(ford, transit, 1986, 180, benzin, manual, alb, 2.3, yes, 4000). 
+auto(wv, golf, 1995, 280, benzin, manual, rosu, 2.0, yes, 6000). 
+auto(honda, civic, 1998, 280, benzin, manual, negru, 3.1, yes, 9000).
+
+sport_car(Marca,Seria):-auto(Marca,Seria,_,Viteza,_,_,_,_,_,_),Viteza>200.
+
+automobil_de_familie(Marca,Seria):-auto(Marca,Seria,_,_,_,_,_,_,yes,_).
+automobil_de_prestigiu(Marca,Seria):-auto(Marca,Seria,_,_,_,_,_,_,_,Pret),Pret>5000.
+automobil_pentru_dame(Marca,Seria):-auto(Marca,Seria,_,_,_,automat,_,_,_,_).
+automobil_de_anticvariat(Marca,Seria):-auto(Marca,Seria,An,_,_,_,_,_,_,_),An<1990.
+
+
+
+auto(X,Y,_,_,_,_,negru,_,_,_)
+auto(wv,golf,P,Q,R,S,T,U,V,W)
+auto(N,O,P,Q,R,S,T,U,V,W),W<4500
+auto(N,O,P,Q,R,S,T,U,V,W),W<4500,P>1995,T=negru
+auto(N,O,P,Q,R,S,T,U,V,W),U>2,U<3,(   T=negru; T=rosu)
+sport_car(X,Y)
+sport_car(honda,civic)
+sport_car(ford,transit)
+
+
+auto(N,O,P,Q,R,S,T,U,V,W)

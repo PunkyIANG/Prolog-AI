@@ -1,0 +1,4 @@
+max(Max,[]):-write(Max).
+max(Max,[X|T]):- (   Max < X ->  Max1 is X; Max1 is Max), max(Max1,T).
+
+start_max(X) :- max(0,X).

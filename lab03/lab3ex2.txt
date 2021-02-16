@@ -1,0 +1,4 @@
+search(X,[X|_],Counter):-write(Counter),!.
+search(X,[Y|Tail],Counter):- X\=Y, Counter1 is Counter + 1, search(X,Tail,Counter1).
+
+start_search(X,List):-search(X,List,0).

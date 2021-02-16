@@ -1,0 +1,11 @@
+parinte(pavel,cristi)
+parinte(X,cristi)
+parinte(X,Y)
+femeie(dina)
+este_barbat(pavel)
+este_barbat(X)    //eroare
+cuplu(Sot,Sotie),\+parinte(Sot,_),\+parinte(Sotie,_)	 \+(...)nu lucreaza
+mama(X,_)
+parinte(Bunic,Mama),parinte(Mama,Copil),femeie(Mama)
+fericit(X)
+aredoicopii(X)

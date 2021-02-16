@@ -1,0 +1,5 @@
+media([],Sum,Counter):- Media is Sum/Counter, write(Media),!.
+media([Head|Tail],Sum,Counter):- Sum1 is Sum + Head, Counter1 is Counter + 1,
+    	media(Tail,Sum1,Counter1).
+
+start_media(X):-media(X,0,0).

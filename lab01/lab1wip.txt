@@ -1,0 +1,117 @@
+barbat(cristi).
+barbat(sebastian).
+barbat(pavel).
+barbat(victor).
+barbat(alex).
+barbat(valerian).
+barbat(marin).
+barbat(victor2).
+barbat(victorjr).
+barbat(mihai).
+barbat(adrian).
+
+femeie(ioana).
+femeie(dina).
+femeie(violeta).
+femeie(emilia).
+femeie(ludmila).
+femeie(olesea).
+femeie(tatiana).
+femeie(emilia2).
+
+
+parinte(pavel, cristi).
+parinte(dina,cristi).
+parinte(pavel,sebastian).
+parinte(dina,sebastian).
+parinte(victor,dina).
+parinte(ioana,dina).
+parinte(victor,alex).
+parinte(ioana,alex).
+parinte(alex,violeta).
+parinte(emilia,pavel).
+parinte(valerian,pavel).
+parinte(emilia,marin).
+parinte(valerian,marin).
+parinte(emilia,ludmila).
+parinte(valerian,ludmila).
+parinte(ludmila, victorjr).
+parinte(victor2, victorjr).
+parinte(marin,mihai).
+parinte(marin,adrian).
+parinte(tatiana,mihai).
+parinte(tatiana,adrian).
+parinte(victorjr,emilia2).
+parinte(olesea,emilia2).
+
+casatorit(pavel,dina).
+casatorit(victor,ioana).
+casatorit(valerian,emilia).
+casatorit(victor2,ludmila).
+casatorit(victorjr,olesea).
+casatorit(marin,tatiana).
+
+
+
+mama(Mama,Copil):-femeie(Mama),parinte(Mama,Copil).
+tata(Tata,Copil):-barbat(Tata),parinte(Tata,Copil).
+frate(Frate,Persoana):-barbat(Frate),parinte(Parinte,Frate),
+    parinte(Parinte,Persoana),Frate\=Persoana.
+sora(Sora,Persoana):-femeie(Sora),parinte(Parinte,Sora),
+    parinte(Parinte,Persoana),Sora\=Persoana.
+copil(Copil, Parinte):-parinte(Parinte,Copil).
+fiu(Fiu,Parinte):-barbat(Fiu),parinte(Parinte,Fiu).
+fiica(Fiica,Parinte):-femeie(Fiica),parinte(Parinte,Fiica).
+bunic(Bunic,Nepot):-barbat(Bunic),parinte(Bunic,Parinte),
+    parinte(Parinte,Nepot).
+bunica(Bunica,Nepoata):-femeie(Bunica),parinte(Bunica,Parinte),
+    parinte(Parinte,Nepoata).
+unchi(Unchi,Persoana):-barbat(Unchi), parinte(Bunic,Unchi), parinte(Bunic,Parinte), 
+    parinte(Parinte,Persoana),Unchi \=Parinte.
+matusa(Matusa,Persoana):-femeie(Matusa), parinte(Bunic,Matusa), parinte(Bunic,Parinte), 
+    parinte(Parinte,Persoana),Matusa \=Parinte.
+nepot(Nepot,Bunic):-barbat(Nepot),parinte(Bunic,Parinte)
+    ,parinte(Parinte,Nepot).
+nepoata(Nepoata,Bunica):-femeie(Nepoata),parinte(Bunica,Parinte),
+    parinte(Parinte,Nepoata).
+stramos(Stramos,Copil):-parinte(Stramos,Bunic),parinte(Bunic,Parinte),parinte(Parinte,Copil).
+urmas(Ruda,Urmas):-(   parinte(Ruda,Urmas));(   parinte(Ruda,Parinte),parinte(Parinte,Urmas));
+    (   parinte(Ruda,Bunic),parinte(Bunic,Parinte),parinte(Parinte,Urmas)).
+verisor(Verisor,Persoana):-barbat(Verisor),
+    parinte(ParinteV,Verisor),parinte(Bunic,ParinteV),
+    parinte(Bunic,ParinteP),parinte(ParinteP,Persoana),
+    \+frate(Verisor,Persoana),Verisor\=Persoana.
+verisoara(Verisoara,Persoana):-femeie(Verisoara),
+    parinte(ParinteV,Verisoara),parinte(Bunic,ParinteV),
+    parinte(Bunic,ParinteP),parinte(ParinteP,Persoana),
+    \+sora(Verisoara,Persoana),Verisoara\=Persoana.
+areCopii(Parinte):-parinte(Parinte,_).
+esteBunel(Bunel):-bunic(Bunel,_).
+esteBunica(Bunica):-bunica(Bunica,_).
+areFrati(Persoana):-frate(_,Persoana).
+areVeri(Persoana):-verisor(_,Persoana);verisoara(_,Persoana).
+
+cuplu(Persoana,Persoana2):-casatorit(Persoana,Persoana2);casatorit(Persoana2,Persoana).
+soacra(Soacra,Sot):-cuplu(Sot,Sot2),mama(Soacra,Sot2).
+cumnat(Cumnat,Sot):-cuplu(Sot,Sot2),(frate(Cumnat,Sot2);sora(Cumnat,Sot2)).
+ginere(Ginere,Parinte):-barbat(Ginere),cuplu(Ginere,Fiica),parinte(Parinte,Fiica).
+
+este_barbat(Barbat):- \+femeie(Barbat).
+
+fericit(Parinte):-parinte(Parinte,Copil1),parinte(Parinte,Copil2),Copil1\=Copil2.
+
+aredoicopii(Parinte):-parinte(Parinte,Copil),sora(Copil2,Copil),Copil2\=Copil.
+
+urmas_r(Urmas,Stramos):-parinte(Stramos,Urmas);
+    (   parinte(Parinte,Urmas),urmas_r(Urmas,Parinte)).
+
+stramos_r(Stramos,Urmas):-parinte(Stramos,Urmas);
+    (   parinte(Parinte,Urmas),stramos_r(Parinte,Urmas)).
+
+stramos_2(Stramos,Urmas):-parinte(Stramos,Urmas).
+stramos_2(Stramos,Urmas):-parinte(Stramos,Parinte),stramos_2(Parinte,Urmas).
+
+urmas_2(Urmas,Stramos):-parinte(Stramos,Urmas).
+urmas_2(Urmas,Stramos):-parinte(Parinte,Urmas),stramos(Stramos,Parinte).
+
+
