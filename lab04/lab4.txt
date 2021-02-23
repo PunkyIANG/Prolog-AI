@@ -1,0 +1,13 @@
+remove_double([],_,[]).
+remove_double([Head|Tail],Blacklist,Result):- (list_contains(Blacklist, Head) -> 
+        (remove_elem(Head,Blacklist,Blacklist1), remove_double(Tail,Blacklist1,Result1), Result = Result1);
+        (Blacklist1 = [Head|Blacklist], remove_double(Tail,Blacklist1,Result1), Result = [Head|Result1])).
+
+start_remove_double(List,Result):-remove_double(List,[],Result).
+
+list_contains([Head|_],Head).
+list_contains([Head|Tail],Elem):-Head\=Elem,list_contains(Tail,Elem).
+
+remove_elem(_,[],[]).
+remove_elem(Elem,[Elem|Tail],Result):-remove_elem(Elem,Tail,Result).
+remove_elem(Elem,[Head|Tail],[Head|Result]):-remove_elem(Elem,Tail,Result).

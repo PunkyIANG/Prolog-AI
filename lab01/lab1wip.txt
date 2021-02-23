@@ -66,10 +66,12 @@ bunic(Bunic,Nepot):-barbat(Bunic),parinte(Bunic,Parinte),
     parinte(Parinte,Nepot).
 bunica(Bunica,Nepoata):-femeie(Bunica),parinte(Bunica,Parinte),
     parinte(Parinte,Nepoata).
-unchi(Unchi,Persoana):-barbat(Unchi), parinte(Bunic,Unchi), parinte(Bunic,Parinte), 
+mos(Unchi,Persoana):-barbat(Unchi), parinte(Bunic,Unchi), parinte(Bunic,Parinte), 
     parinte(Parinte,Persoana),Unchi \=Parinte.
 matusa(Matusa,Persoana):-femeie(Matusa), parinte(Bunic,Matusa), parinte(Bunic,Parinte), 
     parinte(Parinte,Persoana),Matusa \=Parinte.
+
+
 nepot(Nepot,Bunic):-barbat(Nepot),parinte(Bunic,Parinte)
     ,parinte(Parinte,Nepot).
 nepoata(Nepoata,Bunica):-femeie(Nepoata),parinte(Bunica,Parinte),
@@ -92,6 +94,7 @@ areFrati(Persoana):-frate(_,Persoana).
 areVeri(Persoana):-verisor(_,Persoana);verisoara(_,Persoana).
 
 cuplu(Persoana,Persoana2):-casatorit(Persoana,Persoana2);casatorit(Persoana2,Persoana).
+unchi(Unchi,Persoana):-(mos(Z,Persoana);matusa(Z,Persoana)),cuplu(Z,Unchi),barbat(Unchi).
 soacra(Soacra,Sot):-cuplu(Sot,Sot2),mama(Soacra,Sot2).
 cumnat(Cumnat,Sot):-cuplu(Sot,Sot2),(frate(Cumnat,Sot2);sora(Cumnat,Sot2)).
 ginere(Ginere,Parinte):-barbat(Ginere),cuplu(Ginere,Fiica),parinte(Parinte,Fiica).

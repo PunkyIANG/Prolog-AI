@@ -1,0 +1,3 @@
+element([],_,_):-false.
+element([Head|_],Head,0).
+element([_|Tail],Element,Counter):-Counter>0,Counter1 is Counter - 1, element(Tail,Element,Counter1).
